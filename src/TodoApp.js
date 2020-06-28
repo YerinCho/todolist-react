@@ -29,21 +29,31 @@ const TodoApp = () => {
   const onComplete = id => {
     setTodos(
       todos.map(
-        todo => (todo.id === id) ?
+        todo => todo.id === id ?
           {...todo, state: !todo.complete ? "completed" : "", complete: !todo.complete} : todo
       )
     )
   };
 
-return (
-  <section className="todoapp">
-    <div>
-      <h1>TODOS</h1>
-      <TodoInput onAdd={onAdd}/>
-      <TodoList todos={todos} onComplete={onComplete}/>
-      <TodoCount/>
-    </div>
-  </section>
-);
+  const onDelete = id => {
+    const isDelete = window.confirm("정말로 지울건가요?");
+    if (!isDelete) {
+      return;
+    }
+    setTodos(
+      todos.filter(todo => todo.id !== id)
+    )
+  };
+
+  return (
+    <section className="todoapp">
+      <div>
+        <h1>TODOS</h1>
+        <TodoInput onAdd={onAdd}/>
+        <TodoList todos={todos} onComplete={onComplete} onDelete={onDelete}/>
+        <TodoCount/>
+      </div>
+    </section>
+  );
 }
 export default TodoApp;

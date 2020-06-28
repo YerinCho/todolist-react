@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({todos, onComplete}) => {
+const TodoList = ({todos, onComplete, onDelete}) => {
   return (
     <div className="main">
       <input className="toggle-all" type="checkbox"/>
@@ -10,6 +10,7 @@ const TodoList = ({todos, onComplete}) => {
           <TodoItem todo={todo}
                     key={todo.id}
                     onComplete={onComplete}
+                    onDelete={onDelete}
           />
         ))}
         <li className="editing">
