@@ -1,18 +1,15 @@
 import React from "react";
+import TodoItem from "./TodoItem";
 
-const TodoList = () => {
+const TodoList = ({todos}) => {
+  console.log(todos);
   return (
     <div className="main">
       <input className="toggle-all" type="checkbox"/>
       <ul id="todo-list" className="todo-list">
-        <li>
-          <div className="view">
-            <input className="toggle" type="checkbox"/>
-            <label className="label">새로운 타이틀</label>
-            <button className="destroy"></button>
-          </div>
-          <input className="edit" value="새로운 타이틀"/>
-        </li>
+        {todos.map(todo => (
+          <TodoItem todo={todo} key={todo.id} />
+        ))}
         <li className="editing">
           <div className="view">
             <input className="toggle" type="checkbox"/>
