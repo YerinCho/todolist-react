@@ -4,8 +4,10 @@ import TodoItem from "./TodoItem";
 const TodoInput = ({onAdd}) => {
 
   const onKeyPress = (event) => {
-    if (event && event.key === 'Enter') {
-      onAdd(event.target.value);
+    const title = event.target.value;
+    if (event.key === 'Enter' && title.trim() !== "") {
+      onAdd(title);
+      event.target.value = "";
     }
   }
 

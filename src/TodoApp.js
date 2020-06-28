@@ -10,16 +10,10 @@ const TodoApp = () => {
       title: "todoList 하기",
       complete: false,
       state: "",
-    },
-    {
-      id: 2,
-      title: "음...",
-      complete: false,
-      state: "",
     }
   ]);
 
-  const nextId = useRef(3);
+  const nextId = useRef(2);
 
   const onAdd = title => {
     const newTodoItem = {
