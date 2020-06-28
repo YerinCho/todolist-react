@@ -37,20 +37,42 @@ const TodoApp = () => {
 
   const onDelete = id => {
     const isDelete = window.confirm("정말로 지울건가요?");
-    if (!isDelete) {
-      return;
+    if (isDelete) {
+      setTodos(
+        todos.filter(todo => todo.id !== id)
+      )
     }
+  };
+
+  const onEdit = id => {
     setTodos(
-      todos.filter(todo => todo.id !== id)
+      todos.map(
+        todo => todo.id === id ? {...todo, state: "editing"} : todo
+      )
     )
   };
+
+  const onEditExit = id => {
+    setTodos(
+      todos.map(
+        todo => todo.id === id ? {...todo, state: ""} : todo
+      )
+    )
+  };
+
 
   return (
     <section className="todoapp">
       <div>
         <h1>TODOS</h1>
         <TodoInput onAdd={onAdd}/>
-        <TodoList todos={todos} onComplete={onComplete} onDelete={onDelete}/>
+        <TodoList
+          todos={todos}
+          onComplete={onComplete}
+          onDelete={onDelete}
+          onEdit={onEdit}
+          onEditExit={onEditExit}
+        />
         <TodoCount/>
       </div>
     </section>
