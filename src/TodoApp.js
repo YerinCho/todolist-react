@@ -2,19 +2,16 @@ import React, {useRef, useState} from "react";
 import TodoInput from "./TodoInput.js";
 import TodoList from "./TodoList";
 import TodoFilter from "./TodoFilter";
-import {STATE} from "./constants";
+import {FILTER_TYPE, STATE} from "./constants";
+import {render} from "react-dom";
+import {createRenderer} from "react-dom/test-utils";
 
 const TodoApp = () => {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "todoList 하기",
-      complete: false,
-      state: "",
-    }
-  ]);
+  const [allTodos, setAllTodos] = useState([]);
+  const [todos, setTodos] = useState(allTodos);
+  const [filter, setFilter] = useState(FILTER_TYPE.ALL);
 
-  const nextId = useRef(2);
+  const nextId = useRef(1);
 
   const onAdd = title => {
     const newTodoItem = {
@@ -23,43 +20,64 @@ const TodoApp = () => {
       complete: false,
       state: STATE.NONE,
     };
-    setTodos(todos.concat(newTodoItem));
+    setAllTodos(allTodos.concat(newTodoItem));
     nextId.current += 1;
+    onFilter(filter)
   }
 
   const onComplete = id => {
-    setTodos(
-      todos.map(
+    setAllTodos(
+      allTodos.map(
         todo => todo.id === id ?
           {...todo, state: !todo.complete ? STATE.COMPLETED : STATE.NONE, complete: !todo.complete} : todo
       )
     )
+    onFilter(filter);
   };
 
   const onDelete = id => {
     const isDelete = window.confirm("정말로 지울건가요?");
     if (isDelete) {
-      setTodos(
-        todos.filter(todo => todo.id !== id)
+      setAllTodos(
+        allTodos.filter(todo => todo.id !== id)
       )
     }
+    onFilter(filter);
   };
 
   const onEdit = id => {
-    setTodos(
-      todos.map(
+    setAllTodos(
+      allTodos.map(
         todo => todo.id === id ? {...todo, state: STATE.EDIT} : todo
       )
     )
+    onFilter(filter);
   };
 
   const onEditExit = id => {
-    setTodos(
-      todos.map(
+    setAllTodos(
+      allTodos.map(
         todo => todo.id === id ? {...todo, state: todo.complete ? STATE.COMPLETED : STATE.NONE} : todo
       )
     )
+    onFilter(filter);
   };
+
+  const onFilter = filterType => {
+    console.log(filterType)
+    if (filterType === FILTER_TYPE.COMPLETED) {
+      setTodos(
+        allTodos.filter(todo => todo.complete)
+      )
+    } else if (filterType === FILTER_TYPE.ACTIVE) {
+      setTodos(
+        allTodos.filter(todo => !todo.complete)
+      )
+    } else {
+      setTodos(allTodos);
+    }
+    setFilter(filterType);
+  }
 
 
   return (
@@ -69,6 +87,7 @@ const TodoApp = () => {
         <TodoInput onAdd={onAdd}/>
         <TodoFilter
           todos={todos}
+          onFilter={onFilter}
           onComplete={onComplete}
           onDelete={onDelete}
           onEdit={onEdit}

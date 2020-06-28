@@ -1,8 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import TodoCount from "./TodoCount";
 import TodoList from "./TodoList";
 
-const TodoFilter = ({todos, onComplete, onDelete, onEdit, onEditExit}) => {
+const TodoFilter = ({todos, onComplete, onDelete, onEdit, onEditExit, onFilter}) => {
   return (
     <div>
       <TodoList
@@ -11,7 +11,9 @@ const TodoFilter = ({todos, onComplete, onDelete, onEdit, onEditExit}) => {
         onDelete={onDelete}
         onEdit={onEdit}
         onEditExit={onEditExit}/>
-      <TodoCount/>
+      <TodoCount
+        onFilter={onFilter}
+        count={todos.length}/>
     </div>
   );
 }
