@@ -26,15 +26,24 @@ const TodoApp = () => {
     nextId.current += 1;
   }
 
-  return (
-    <section className="todoapp">
-      <div>
-        <h1>TODOS</h1>
-        <TodoInput onAdd={onAdd}/>
-        <TodoList todos={todos}/>
-        <TodoCount/>
-      </div>
-    </section>
-  );
+  const onComplete = id => {
+    setTodos(
+      todos.map(
+        todo => (todo.id === id) ?
+          {...todo, state: !todo.complete ? "completed" : "", complete: !todo.complete} : todo
+      )
+    )
+  };
+
+return (
+  <section className="todoapp">
+    <div>
+      <h1>TODOS</h1>
+      <TodoInput onAdd={onAdd}/>
+      <TodoList todos={todos} onComplete={onComplete}/>
+      <TodoCount/>
+    </div>
+  </section>
+);
 }
 export default TodoApp;
