@@ -1,16 +1,11 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoInput = () => {
+const TodoInput = ({onAdd}) => {
 
   const onKeyPress = (event) => {
     if (event && event.key === 'Enter') {
-      const input = {
-        title: event.target.value,
-        complete: false,
-        state: "active"
-      }
-      event.target.value = '';
+      onAdd(event.target.value);
     }
   }
 

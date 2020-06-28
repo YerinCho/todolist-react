@@ -2,13 +2,12 @@ import React from "react";
 import TodoItem from "./TodoItem";
 
 const TodoList = ({todos}) => {
-  console.log(todos);
   return (
     <div className="main">
       <input className="toggle-all" type="checkbox"/>
       <ul id="todo-list" className="todo-list">
         {todos.map(todo => (
-          <TodoItem todo={todo} key={todo.id} />
+          <TodoItem todo={todo} key={todo.id}/>
         ))}
         <li className="editing">
           <div className="view">

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import TodoInput from "./TodoInput.js";
 import TodoCount from "./TodoCount";
 import TodoList from "./TodoList";
@@ -19,10 +19,17 @@ const TodoApp = () => {
     }
   ]);
 
-  const onAdd = item => {
-    const newTodoItem = item;
-    // this.todoItems.push(newTodoItem);
-    // this.setState(this.todoItems, FILTER_TYPE.ALL);
+  const nextId = useRef(3);
+
+  const onAdd = title => {
+    const newTodoItem = {
+      id: nextId.current,
+      title: title,
+      complete: false,
+      state: "",
+    };
+    setTodos(todos.concat(newTodoItem));
+    nextId.current += 1;
   }
 
   return (

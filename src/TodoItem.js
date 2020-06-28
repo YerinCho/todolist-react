@@ -1,7 +1,6 @@
 import React from "react";
 
 const TodoItem = ({todo}) => {
-  console.log(todo);
   const {id, title, complete, state} = todo;
 
   return (
