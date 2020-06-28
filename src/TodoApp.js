@@ -1,7 +1,8 @@
 import React, {useRef, useState} from "react";
 import TodoInput from "./TodoInput.js";
-import TodoCount from "./TodoCount";
 import TodoList from "./TodoList";
+import TodoFilter from "./TodoFilter";
+import {STATE} from "./constants";
 
 const TodoApp = () => {
   const [todos, setTodos] = useState([
@@ -20,7 +21,7 @@ const TodoApp = () => {
       id: nextId.current,
       title: title,
       complete: false,
-      state: "",
+      state: STATE.NONE,
     };
     setTodos(todos.concat(newTodoItem));
     nextId.current += 1;
@@ -30,7 +31,7 @@ const TodoApp = () => {
     setTodos(
       todos.map(
         todo => todo.id === id ?
-          {...todo, state: !todo.complete ? "completed" : "", complete: !todo.complete} : todo
+          {...todo, state: !todo.complete ? STATE.COMPLETED : STATE.NONE, complete: !todo.complete} : todo
       )
     )
   };
@@ -47,7 +48,7 @@ const TodoApp = () => {
   const onEdit = id => {
     setTodos(
       todos.map(
-        todo => todo.id === id ? {...todo, state: "editing"} : todo
+        todo => todo.id === id ? {...todo, state: STATE.EDIT} : todo
       )
     )
   };
@@ -55,7 +56,7 @@ const TodoApp = () => {
   const onEditExit = id => {
     setTodos(
       todos.map(
-        todo => todo.id === id ? {...todo, state: ""} : todo
+        todo => todo.id === id ? {...todo, state: todo.complete ? STATE.COMPLETED : STATE.NONE} : todo
       )
     )
   };
@@ -66,14 +67,12 @@ const TodoApp = () => {
       <div>
         <h1>TODOS</h1>
         <TodoInput onAdd={onAdd}/>
-        <TodoList
+        <TodoFilter
           todos={todos}
           onComplete={onComplete}
           onDelete={onDelete}
           onEdit={onEdit}
-          onEditExit={onEditExit}
-        />
-        <TodoCount/>
+          onEditExit={onEditExit}/>
       </div>
     </section>
   );

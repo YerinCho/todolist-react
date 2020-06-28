@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import {KEY_TYPE} from "./constants";
 
 const TodoItem = ({todo, onComplete, onDelete, onEdit, onEditExit}) => {
   const {id, state, complete} = todo;
@@ -6,11 +7,11 @@ const TodoItem = ({todo, onComplete, onDelete, onEdit, onEditExit}) => {
   const [todoTitle, setTotoTitle] = useState(todo.title);
 
   const onEditFinish = (event) => {
-      if (event.key === "Escape") {
+      if (event.key === KEY_TYPE.ESC) {
         setTotoTitle(title);
         onEditExit(id);
 
-      } else if (event.key === "Enter") {
+      } else if (event.key === KEY_TYPE.ENTER) {
         setTitle(todoTitle);
         onEditExit(id);
       }
