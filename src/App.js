@@ -3,7 +3,7 @@ import "./App.css";
 import TodoApp from "./TodoApp.js";
 
 function App() {
-  return <TodoApp />;
+  return <TodoApp/>;
 }
 
 export default App;

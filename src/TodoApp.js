@@ -11,7 +11,7 @@ const TodoApp = () => {
 
   const nextId = useRef(1);
 
-  const onAdd = async title => {
+  const onAdd = title => {
     const newTodoItem = {
       id: nextId.current,
       title: title,
@@ -19,7 +19,7 @@ const TodoApp = () => {
       state: STATE.NONE,
     };
     setAllTodos(allTodos.concat(newTodoItem));
-    if(filter === FILTER_TYPE.ACTIVE || FILTER_TYPE.ALL) {
+    if (filter === FILTER_TYPE.ACTIVE || FILTER_TYPE.ALL) {
       setTodos(todos.concat(newTodoItem));
     }
     nextId.current += 1;
@@ -40,7 +40,7 @@ const TodoApp = () => {
     )
   };
 
-  const onDelete =  id => {
+  const onDelete = id => {
     const isDelete = window.confirm("정말로 지울건가요?");
     if (isDelete) {
       setAllTodos(
@@ -52,7 +52,7 @@ const TodoApp = () => {
     }
   };
 
-  const onEdit =  id => {
+  const onEdit = id => {
     setAllTodos(
       allTodos.map(
         todo => todo.id === id ? {...todo, state: STATE.EDIT} : todo
@@ -65,7 +65,7 @@ const TodoApp = () => {
     )
   };
 
-  const onEditExit =  id => {
+  const onEditExit = id => {
     setAllTodos(
       allTodos.map(
         todo => todo.id === id ? {...todo, state: todo.complete ? STATE.COMPLETED : STATE.NONE} : todo
@@ -80,15 +80,15 @@ const TodoApp = () => {
 
   const onFilter = filterType => {
     if (filterType === FILTER_TYPE.COMPLETED) {
-       setTodos(
+      setTodos(
         allTodos.filter(todo => todo.complete)
       )
     } else if (filterType === FILTER_TYPE.ACTIVE) {
-       setTodos(
+      setTodos(
         allTodos.filter(todo => !todo.complete)
       )
     } else if (filterType === FILTER_TYPE.ALL) {
-       setTodos(allTodos);
+      setTodos(allTodos);
     }
     setFilter(filterType);
   }
