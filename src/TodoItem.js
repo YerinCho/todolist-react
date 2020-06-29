@@ -7,14 +7,14 @@ const TodoItem = ({todo, onComplete, onDelete, onEdit, onEditExit}) => {
   const [todoTitle, setTotoTitle] = useState(todo.title);
 
   const onEditFinish = (event) => {
-      if (event.key === KEY_TYPE.ESC) {
-        setTotoTitle(title);
-        onEditExit(id);
+    if (event.key === KEY_TYPE.ESC) {
+      setTotoTitle(title);
+      onEditExit(id);
 
-      } else if (event.key === KEY_TYPE.ENTER) {
-        setTitle(todoTitle);
-        onEditExit(id);
-      }
+    } else if (event.key === KEY_TYPE.ENTER) {
+      setTitle(todoTitle);
+      onEditExit(id);
+    }
   };
 
   const onUpdate = event => {
@@ -27,7 +27,8 @@ const TodoItem = ({todo, onComplete, onDelete, onEdit, onEditExit}) => {
       <div className="view">
         <input className="toggle" type="checkbox"
                onClick={() => onComplete(id)}
-               data-complete={complete}/>
+               checked={complete}
+        />
         <label className="label"
                onDoubleClick={() => onEdit(id)}>{title}</label>
         <button className="destroy"
