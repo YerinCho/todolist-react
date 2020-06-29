@@ -2,6 +2,8 @@ import React, {useRef, useState} from "react";
 import TodoInput from "./TodoInput.js";
 import TodoFilter from "./TodoFilter";
 import {FILTER_TYPE, STATE} from "./constants";
+import TodoList from "./TodoList";
+import TodoCount from "./TodoCount";
 
 const TodoApp = () => {
 
@@ -98,13 +100,16 @@ const TodoApp = () => {
       <div>
         <h1>TODOS</h1>
         <TodoInput onAdd={onAdd}/>
-        <TodoFilter
+        <TodoList
           todos={todos}
-          onFilter={onFilter}
           onComplete={onComplete}
           onDelete={onDelete}
           onEdit={onEdit}
           onEditExit={onEditExit}/>
+        <div className="count-container">
+          <TodoCount count={todos.length}/>
+          <TodoFilter onFilter={onFilter}/>
+        </div>
       </div>
     </section>
   );
