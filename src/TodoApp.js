@@ -46,8 +46,10 @@ const TodoApp = () => {
       setAllTodos(
         allTodos.filter(todo => todo.id !== id)
       )
+      setTodos(
+        todos.filter(todo => todo.id !== id)
+      )
     }
-    onFilter(filter);
   };
 
   const onEdit =  id => {
@@ -56,7 +58,11 @@ const TodoApp = () => {
         todo => todo.id === id ? {...todo, state: STATE.EDIT} : todo
       )
     )
-    onFilter(filter);
+    setTodos(
+      todos.map(
+        todo => todo.id === id ? {...todo, state: STATE.EDIT} : todo
+      )
+    )
   };
 
   const onEditExit =  id => {
@@ -65,7 +71,11 @@ const TodoApp = () => {
         todo => todo.id === id ? {...todo, state: todo.complete ? STATE.COMPLETED : STATE.NONE} : todo
       )
     )
-    onFilter(filter);
+    setTodos(
+      todos.map(
+        todo => todo.id === id ? {...todo, state: todo.complete ? STATE.COMPLETED : STATE.NONE} : todo
+      )
+    )
   };
 
   const onFilter = filterType => {
@@ -81,7 +91,6 @@ const TodoApp = () => {
        setTodos(allTodos);
     }
     setFilter(filterType);
-    console.log("dhodkseho")
   }
 
   return (
