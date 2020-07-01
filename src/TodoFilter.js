@@ -30,19 +30,19 @@ const TodoFilter = ({onFilter}) => {
     <div>
         <ul className="filters">
           <li>
-            <a className={"all" + (selectAll ? " selected" : "")} href="#/" onClick={() => {
+            <a className={`all ${selectAll ? "selected" : ""}`} href="#/" onClick={() => {
               onFilter(FILTER_TYPE.ALL);
               setSelect(FILTER_TYPE.ALL)
             }}>전체보기</a>
           </li>
           <li>
-            <a className={"active" + (selectActive ? " selected" : "")} href="#/active" onClick={() => {
+            <a className={`active ${selectActive ? "selected" : ""}`} href="#/active" onClick={() => {
               onFilter(FILTER_TYPE.ACTIVE);
               setSelect(FILTER_TYPE.ACTIVE)
             }}>해야할 일</a>
           </li>
           <li>
-            <a className={"completed" + (selectCompleted ? " selected" : "")} href="#/completed" onClick={() => {
+            <a className={`completed ${selectCompleted ? "selected" : ""}`} href="#/completed" onClick={() => {
               onFilter(FILTER_TYPE.COMPLETED);
               setSelect(FILTER_TYPE.COMPLETED)
             }}>완료한 일</a>
