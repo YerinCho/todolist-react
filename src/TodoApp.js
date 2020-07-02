@@ -41,27 +41,10 @@ const TodoApp = () => {
         }
     };
 
-    const onEdit = id => {
-        setAllTodos(
-            allTodos.map(
-                todo => todo.id === id ? {...todo, state: STATE.EDIT} : todo
-            )
-        )
-    };
-
-    const onEditExit = id => {
-        setAllTodos(
-            allTodos.map(
-                todo => todo.id === id ? {...todo, state: todo.complete ? STATE.COMPLETED : STATE.NONE} : todo
-            )
-        )
-    };
-
     const filterTodos = filter => {
         if (filter === FILTER_TYPE.COMPLETED) {
             return allTodos.filter(todo => todo.complete);
         } else if (filter === FILTER_TYPE.ACTIVE) {
-            console.log(allTodos.filter(todo => !todo.complete));
             return allTodos.filter(todo => !todo.complete);
         } else if (filter === FILTER_TYPE.ALL) {
             return allTodos;
@@ -82,8 +65,6 @@ const TodoApp = () => {
                     filteredTodos={filterTodos(filter)}
                     onComplete={onComplete}
                     onDelete={onDelete}
-                    onEdit={onEdit}
-                    onEditExit={onEditExit}
                 />
             </div>
             <div className="count-container">

@@ -1,7 +1,7 @@
 import React from "react";
 import TodoItem from "./TodoItem";
 
-const TodoList = ({filteredTodos, onComplete, onDelete, onEdit, onEditExit}) => {
+const TodoList = ({filteredTodos, onComplete, onDelete}) => {
 
     return (
         <div className="main">
@@ -12,8 +12,6 @@ const TodoList = ({filteredTodos, onComplete, onDelete, onEdit, onEditExit}) => 
                               key={todo.id}
                               onComplete={onComplete}
                               onDelete={onDelete}
-                              onEdit={onEdit}
-                              onEditExit={onEditExit}
                     />)}
             </ul>
         </div>

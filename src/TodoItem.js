@@ -1,11 +1,19 @@
 import React, {useState} from "react";
-import {KEY_TYPE} from "./constants";
+import {KEY_TYPE, STATE} from "./constants";
 
-const TodoItem = ({todo, onComplete, onDelete, onEdit, onEditExit}) => {
-    const {id, state, complete} = todo;
+const TodoItem = ({todo, onComplete, onDelete}) => {
+    const {id, complete} = todo;
     const [title, setTitle] = useState(todo.title);
     const [todoTitle, setTotoTitle] = useState(todo.title);
+    const [state, setState] = useState(todo.state);
 
+    const onEdit = () => {
+        setState(STATE.EDIT)
+    };
+
+    const onEditExit = () => {
+        setState(todo.complete ? STATE.COMPLETED : STATE.NONE);
+    };
 
     const onEditFinish = (event) => {
         if (event.key === KEY_TYPE.ESC) {
@@ -32,9 +40,9 @@ const TodoItem = ({todo, onComplete, onDelete, onEdit, onEditExit}) => {
                            checked={complete}
                     />
                     <label className="label"
-                           onDoubleClick={() => onEdit(id)}>{title}</label>
+                           onDoubleClick={() => onEdit()}>{title}</label>
                     <button className="destroy"
-                            onClick={() => onDelete(id)}></button>
+                            onClick={() => onDelete()}></button>
                 </div>
                 <input className="edit" value={todoTitle}
                        onChange={event => onUpdate(event)}
