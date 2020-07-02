@@ -23,6 +23,15 @@ const TodoApp = () => {
         nextId.current += 1;
     };
 
+    const onChangeTitle = (title, id) => {
+        setAllTodos(
+            allTodos.map(
+                todo => todo.id === id ?
+                    {...todo, title: title} : todo
+            )
+        )
+    };
+
     const onComplete = id => {
         setAllTodos(
             allTodos.map(
@@ -31,7 +40,6 @@ const TodoApp = () => {
             )
         )
     };
-
     const onDelete = id => {
         const isDelete = window.confirm("정말로 지울건가요?");
         if (isDelete) {
@@ -65,6 +73,7 @@ const TodoApp = () => {
                     filteredTodos={filterTodos(filter)}
                     onComplete={onComplete}
                     onDelete={onDelete}
+                    onChangeTitle={onChangeTitle}
                 />
             </div>
             <div className="count-container">
